@@ -1,0 +1,30 @@
+language: python
+
+python:
+  - "2.7"
+  - "3.5"
+  - "3.6"
+  - "3.7"
+  - "3.8"
+  - "3.9"
+  - "pypy"
+
+
+# test script
+before_script:
+  - cmake .
+script:
+  - export PYTHONPATH=$(pwd)
+  - ctest -VV --output-on-failure .
+
+addons:
+ apt:
+   packages:
+   - cmake
+
+
+# Notify the mailing list
+notifications:
+  email:
+    on_success: change
+    on_failure: always
